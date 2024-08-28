@@ -18,9 +18,11 @@ export default async function handler(
     }
 
     try {
+        const expath = await chromium.executablePath
+        console.log(expath)
         const browser = await puppeteerExtra.launch({
             args: chromium.args,
-            executablePath: await chromium.executablePath,
+            executablePath: expath,
             headless: chromium.headless,
         });
 
