@@ -23,17 +23,21 @@ export default async function handler(
 
     function isPackageInNodeModules(packageName: string) {
         // Construct the path to the package in node_modules
-        const packagePath = path.join(__dirname, 'node_modules', packageName);
+        const packagePath = path.resolve(__dirname, '../../../../', 'node_modules', packageName);
 
         // Check if the package directory exists
+        console.log(packagePath)
         return fs.existsSync(packagePath);
     }
-    function isFileInPackage(packageName: string, filePath: string) {
-        // Construct the path to the file in the package directory
-        const packageFilePath = path.join(__dirname, 'node_modules', packageName, filePath);
+    function isFolderInPackage(packageName: string, folderPath: string) {
+        const packageFolderPath = path.resolve(__dirname, '../../../../', 'node_modules', packageName, folderPath);
 
-        // Check if the file exists
-        return fs.existsSync(packageFilePath);
+        try {
+            const stats = fs.statSync(packageFolderPath);
+            return stats.isDirectory();
+        } catch (err) {
+            return false; // Return false if the folder does not exist
+        }
     }
     const packageNames = ['puppeteer-extra', 'chrome-aws-lambda', 'puppeteer-extra-plugin-stealth'];
     for (const packageName of packageNames) {
@@ -44,7 +48,7 @@ export default async function handler(
 
     const packageName = 'puppeteer-extra-plugin-stealth';
     const filePath = 'evasions/chrome.app'; // or any specific file within the package
-    const fileExists = isFileInPackage(packageName, filePath);
+    const fileExists = isFolderInPackage(packageName, filePath);
 
     console.log(`File ${filePath} in ${packageName} is ${fileExists ? 'present' : 'missing'}`)
     try {
