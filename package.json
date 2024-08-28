@@ -17,11 +17,14 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "next": "^13.2.1",
-    "puppeteer-core": "^19.11.1",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^19.11.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
